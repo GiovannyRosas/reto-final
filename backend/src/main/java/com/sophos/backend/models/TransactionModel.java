@@ -16,6 +16,7 @@ public class TransactionModel {
   private String typeOperation;
   private double valueOperation;
   private String dateOperation;
+  private String description;
   private String resultOperation;
   private double finalBalance;
   private double GMF;
@@ -26,7 +27,7 @@ public class TransactionModel {
   }
 
   public TransactionModel(int idTransaction, int idPrincipalProduct, int idSecondaryProduct, String typeOperation,
-      double valueOperation, String dateOperation, String resultOperation, double finalBalance, double gMF,
+      double valueOperation, String dateOperation,String description, String resultOperation, double finalBalance, double gMF,
       String financeMovement) {
     this.idTransaction = idTransaction;
     this.idPrincipalProduct = idPrincipalProduct;
@@ -34,10 +35,19 @@ public class TransactionModel {
     this.typeOperation = typeOperation;
     this.valueOperation = valueOperation;
     this.dateOperation = dateOperation;
+    this.description = description;
     this.resultOperation = resultOperation;
     this.finalBalance = finalBalance;
     GMF = gMF;
     this.financeMovement = financeMovement;
+  }
+
+  public String getDescription() {
+    return description;
+  }
+
+  public void setDescription(String description) {
+    this.description = description;
   }
 
   public int getIdTransaction() {
