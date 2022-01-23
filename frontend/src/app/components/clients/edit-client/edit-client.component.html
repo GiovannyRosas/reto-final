@@ -1,0 +1,128 @@
+<div class="">
+  <div class="container-lg m-2" style="height: 90vh">
+    <div class="row justify-content-center align-items-center">
+      <h1 class="text-center">Crear Cliente</h1>
+      <form
+        class="row g-3 needs-validation border rounded p-3 bg-light"
+        style="width: 35%"
+      >
+        <div class="form-group">
+          <label for="name"> Nombre</label>
+          <input
+            class="form-control"
+            type="text"
+            name="name"
+            id="name"
+            placeholder="Nombre"
+            [(ngModel)]="client.name"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="lastname">Apellido</label>
+          <input
+            type="text"
+            class="form-control"
+            name="lastname"
+            id="lastname"
+            [(ngModel)]="client.lastname"
+            placeholder="Apellido"
+            required
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="email">Correo Electronico</label>
+          <input
+            class="form-control"
+            type="email"
+            name="email"
+            id="email"
+            placeholder="example@email.com"
+            [(ngModel)]="client.email"
+            required
+          />
+        </div>
+        <div class="form-group col-md-5">
+          <label for="typeId"> Tipo de Documento</label>
+          <select
+            name="typeId"
+            class="form-select"
+            id="typeId"
+            [(ngModel)]="client.typeId"
+            required
+          >
+            <option value="" selected>Seleccione una opción...</option>
+            <option value="CC">Cédula de Ciudadanía</option>
+            <option value="PA">Pasaporte</option>
+            <option value="CE">Cédula de Extranjería</option>
+            <option value="TI">Tarjeta de Identidad</option>
+          </select>
+        </div>
+        <div class="form-group col-md-7">
+          <label for="numberId">Número de Identificación</label>
+          <input
+            type="text"
+            class="form-control"
+            placeholder="123456789"
+            name="numberId"
+            id="numberId"
+            [(ngModel)]="client.numberId"
+            required
+          />
+        </div>
+        <div class="form-group col-md-7">
+          <label for="telephone">Teléfono</label>
+          <input
+            type="text"
+            name="telephone"
+            class="form-control"
+            placeholder="123456789"
+            id="telephone"
+            [(ngModel)]="client.telephone"
+            required
+          />
+        </div>
+        <div class="form-group col-md-5">
+          <label for="dateBirth">Fecha de Nacimiento</label>
+          <input
+            type="date"
+            name="dateBirth"
+            id="dateBirth"
+            class="form-control"
+            [(ngModel)]="client.dateBirth"
+            required
+          />
+        </div>
+
+        <div class="form-group col-md-6">
+          <button
+            (click)="updateClient()"
+            class="btn btn-outline-info text-dark w-100"
+          >
+            Actualizar Cliente
+          </button>
+        </div>
+
+        <div class="form-group col-md-6">
+          <button
+            (click)="deleteClient()"
+            class="btn btn-outline-danger text-dark w-100"
+          >
+            Eliminar Cliente
+          </button>
+        </div>
+
+        <button
+          (click)="returnClient()"
+          class="btn btn-outline-warning text-dark w-75 mx-auto"
+        >
+          Volver al Inicio
+        </button>
+      </form>
+    </div>
+    <div></div>
+  </div>
+  <hr />
+  <app-read-product></app-read-product>
+</div>
