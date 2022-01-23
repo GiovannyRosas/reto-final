@@ -10,8 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class TransactionService implements TransactionInterface{
-  
+public class TransactionService implements TransactionInterface {
+
   @Autowired
   private TransactionRepository transactionRepository;
 
@@ -22,7 +22,7 @@ public class TransactionService implements TransactionInterface{
 
   @Override
   public ArrayList<TransactionModel> getIdTransaction(int idPrincipalProduct) {
-    return transactionRepository.findByIdPrincipalProductAndResultOperation(idPrincipalProduct, "Efectiva");
+    return transactionRepository.findByIdPrincipalProductAndResultOperation(idPrincipalProduct, "Concluido");
   }
 
 }
