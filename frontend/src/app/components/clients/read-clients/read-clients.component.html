@@ -1,0 +1,41 @@
+<div class="container mt-3">
+  <div class="card">
+    <h1 class="p-2">Clientes</h1>
+    <div class="card-body">
+      <table class="table table-striped table-hover table-sm">
+        <thead>
+          <tr class="text-center table-dark">
+            <th>#</th>
+            <th>Tipo ID</th>
+            <th># Identificación</th>
+            <th>Nombres</th>
+            <th>Apellidos</th>
+            <th>Correo Electrónico</th>
+            <th>Fecha Nacimiento</th>
+            <th>Teléfono</th>
+            <th>Fecha Creación</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody class="align-middle;">
+          <tr *ngFor="let client of clients" class="text-center">
+            <td class="align-middle">{{ client.id }}</td>
+            <td class="align-middle">{{ client.typeId }}</td>
+            <td class="align-middle">{{ client.numberId }}</td>
+            <td class="align-middle">{{ client.name }}</td>
+            <td class="align-middle">{{ client.lastname }}</td>
+            <td class="align-middle">{{ client.email }}</td>
+            <td class="align-middle">{{ client.dateBirth }}</td>
+            <td class="align-middle">{{ client.telephone }}</td>
+            <td class="align-middle">{{ client.dateCreation }}</td>
+            <td class="align-middle">
+              <button (click)="editClient(client.id)" class="btn btn-primary">
+                Editar
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
