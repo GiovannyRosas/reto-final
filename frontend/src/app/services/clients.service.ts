@@ -15,7 +15,19 @@ export class ClientsService {
     return this.http.get<ClientModel[]>(this.URIClient);
   }
 
+  getClientId(id: any): Observable<any> {
+    return this.http.get(`${this.URIClient}${id}`);
+  }
+
   createClient(data: any): Observable<any> {
     return this.http.post(this.URIClient, data);
+  }
+
+  updateClient(id: any, data: any): Observable<any> {
+    return this.http.put(`${this.URIClient}${id}`, data);
+  }
+
+  deleteClient(id: any): Observable<any> {
+    return this.http.delete(`${this.URIClient}${id}`);
   }
 }
