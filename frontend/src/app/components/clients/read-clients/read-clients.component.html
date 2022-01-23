@@ -29,13 +29,17 @@
             <td class="align-middle">{{ client.telephone }}</td>
             <td class="align-middle">{{ client.dateCreation }}</td>
             <td class="align-middle">
-              <button (click)="editClient(client.id)" class="btn btn-primary">
-                Editar
+              <button (click)="editClient(client.id)" class="btn btn-info">
+                Editar <i class="fas fa-edit"></i>
               </button>
             </td>
           </tr>
         </tbody>
       </table>
     </div>
+  </div>
+
+  <div style="display: flex; justify-content: center" class="p-2">
+    <a href="add-clients" class="btn btn-success"> Crear Cliente </a>
   </div>
 </div>

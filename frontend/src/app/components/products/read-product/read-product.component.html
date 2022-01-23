@@ -1,77 +1,43 @@
-<!--<div class="container">
-  <div class="btn-holder" style="display: flex; margin-bottom: 10px">
-    <button (click)="AddProduct(9)" class="btn btn-success">
-      Crear Producto
-    </button>
-  </div>
-
-  <div
-    *ngFor="let product of products"
-    class="card"
-    style="margin-bottom: 10px"
-  >
-    <div class="card-header">
-      <h3>Cuenta de {{ product.typeAccount }}</h3>
-    </div>
-    <div class="card-body">
-      <ul class="list-group">
-        <li class="list-group-item">
-          <span>Número de cuenta: </span> {{ product.numberAccount }}
-        </li>
-        <li class="list-group-item">
-          <span>Saldo: </span> {{ product.balance }}
-        </li>
-        <li class="list-group-item">
-          <span>Estado: </span> {{ product.state }}
-        </li>
-        <li class="list-group-item">
-          <span>Fecha creación: </span>
-          {{ product.creationDate }}
-        </li>
-      </ul>
-    </div>
-    <div
-      class="btn-holder"
-      style="justify-content: flex-end; display: flex; margin-bottom: 10px"
-    >
-      <button
-        (click)="accountStatus(product.idClient, product.idProduct)"
-        class="btn btn-dark"
-        style="margin-left: 5px; margin-right: 5px"
-      >
-        Estado cuenta
-      </button>
-      <button
-        (click)="addMovementMoney(product.idClient, product.idProduct)"
-        class="btn btn-success"
-        style="margin-left: 5px; margin-right: 5px"
-      >
-        Movimientos
-      </button>
-
-      <button
-        (click)="updateProduct(product.idClient, product.idProduct)"
-        class="btn btn-warning"
-        style="margin-left: 5px; margin-right: 5px"
-      >
-        Cambiar Estado
-      </button>
-      <button
-        (click)="cancelProduct(product.idClient, product.idProduct)"
-        class="btn btn-danger"
-        style="margin-left: 5px; margin-right: 5px"
-      >
-        Cancelar Producto
-      </button>
-    </div>
-  </div>
-  <hr />
-</div>-->
-
 <div class="container">
   <div class="row">
-    <div class="">
-      <button (click)="addProduct()">Añadir producto</button>
+    <div class="" style="display: flex; justify-content: center">
+      <div class="row">
+        <button (click)="addProduct()" class="btn btn-info m-2">
+          Añadir producto
+        </button>
+      </div>
+    </div>
+  </div>
+  <div
+    class="row row-cols-1 row-cols-md-2 g-4 m-2"
+    *ngFor="let product of products"
+  >
+    <div class="col">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Cuenta {{ product.typeAccount }}</h5>
+          <hr />
+          <p class="card-text">Número de Cuenta: {{ product.numberAccount }}</p>
+          <hr />
+          <p class="card-text">Saldo: {{ product.balance }}</p>
+          <hr />
+          <p class="card-text">Estado de Cuenta: {{ product.state }}</p>
+          <hr />
+          <p class="card-text">Fecha de Creación: {{ product.creationDate }}</p>
+
+          <a
+            class="btn btn-primary m-2"
+            (click)="updateProduct(product.idClient, product.idProduct)"
+            >Cambiar estado</a
+          >
+          <a
+            href="#"
+            (click)="cancelProduct(product.idClient, product.idProduct)"
+            class="btn btn-danger m-2"
+            >Cancelar el Producto</a
+          >
+        </div>
+      </div>
     </div>
   </div>
 </div>
