@@ -10,6 +10,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { ClientsService } from './services/clients.service';
 import { FormsModule } from '@angular/forms';
 import { ReadClientsComponent } from './components/clients/read-clients/read-clients.component';
+import { EditClientComponent } from './components/clients/edit-client/edit-client.component';
+import { ReadProductComponent } from './components/products/read-product/read-product.component';
 
 @NgModule({
   declarations: [
@@ -18,6 +20,8 @@ import { ReadClientsComponent } from './components/clients/read-clients/read-cli
     CreateClientComponent,
     NavbarComponent,
     ReadClientsComponent,
+    EditClientComponent,
+    ReadProductComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, HttpClientModule, FormsModule],
   providers: [ClientsService],
