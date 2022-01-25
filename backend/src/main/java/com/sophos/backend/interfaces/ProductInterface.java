@@ -2,16 +2,24 @@ package com.sophos.backend.interfaces;
 
 import java.util.ArrayList;
 
-import com.sophos.backend.models.ProductModel;
+import com.sophos.backend.models.ProductEntity;
 
 public interface ProductInterface {
-  public ArrayList<ProductModel> getIdProduct(int idClient);
-  public ProductModel getIdOneProduct(int idProduct);
-  public ProductModel addProduct(ProductModel product, int idClient);
-  public ProductModel changeStatus(ProductModel product);
-  public ProductModel updateBalance(ProductModel product);
-  public ArrayList<ProductModel> listIdOtherAvailableProducts(int idClient, int idProduct);
-  public ProductModel cancelProduct(ProductModel product);
-  public ProductModel addToBalance(ProductModel product, int movement);
-  public ProductModel withdrawToBalance(ProductModel product, int movement);
+  public ArrayList<ProductEntity> getIdProduct(int idClient);
+
+  public ProductEntity getIdOneProduct(int idProduct);
+
+  public ProductEntity addProduct(ProductEntity product, int idClient);
+
+  public ProductEntity changeStatus(ProductEntity product);
+
+  public ProductEntity updateBalance(ProductEntity product);
+
+  public ArrayList<ProductEntity> listIdOtherAvailableProducts(int idClient, int idProduct);
+
+  public ProductEntity cancelProduct(ProductEntity product);
+
+  public ProductEntity addToBalance(ProductEntity product, int movement);
+
+  public ProductEntity withdrawToBalance(ProductEntity product, int movement);
 }

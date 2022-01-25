@@ -4,8 +4,8 @@ import java.util.ArrayList;
 
 import com.sophos.backend.interfaces.ProductInterface;
 import com.sophos.backend.interfaces.TransactionInterface;
-import com.sophos.backend.models.ProductModel;
-import com.sophos.backend.models.TransactionModel;
+import com.sophos.backend.models.ProductEntity;
+import com.sophos.backend.models.TransactionEntity;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -22,15 +22,15 @@ public class TransactionController {
   ProductInterface productInterface;
 
   @GetMapping("")
-  public ArrayList<TransactionModel> getTransactionId(@PathVariable("idProduct") int idPrincipalProduct) {
+  public ArrayList<TransactionEntity> getTransactionId(@PathVariable("idProduct") int idPrincipalProduct) {
     return transactionInterface.getIdTransaction(idPrincipalProduct);
   }
 
   // Create a new Transaction
   @PostMapping("")
   @ResponseBody
-  public TransactionModel saveTransaction(@RequestBody TransactionModel transaction, @PathVariable int idProduct) {
-    ProductModel product = productInterface.getIdOneProduct(idProduct);
+  public TransactionEntity saveTransaction(@RequestBody TransactionEntity transaction, @PathVariable int idProduct) {
+    ProductEntity product = productInterface.getIdOneProduct(idProduct);
     transaction.setIdPrincipalProduct(idProduct);
     if (product.getState().equals("Cancelado")) {/////// Producto cancelado///////
       transaction.setResultOperation("Producto Cancelado");
@@ -60,7 +60,7 @@ public class TransactionController {
         transaction.setFinalBalance(product.getBalance());
       }
     } else if (transaction.getTypeOperation().equals("transferencia") && product.getState().equals("activa")) {////// Transferencia////////////
-      ProductModel productSend = productInterface.getIdOneProduct(transaction.getIdSecondaryProduct());
+      ProductEntity productSend = productInterface.getIdOneProduct(transaction.getIdSecondaryProduct());
 
       if (product.getTypeAccount().equals("ahorros")
           && product.getBalance() - (1.004 * transaction.getValueOperation()) >= 0) {
@@ -70,7 +70,7 @@ public class TransactionController {
         transaction.setFinanceMovement("Debito");
 
         // New Transference
-        TransactionModel transactionSend = new TransactionModel();
+        TransactionEntity transactionSend = new TransactionEntity();
 
         transactionSend.setIdPrincipalProduct(transaction.getIdSecondaryProduct());
         transactionSend.setValueOperation(-transaction.getValueOperation());
@@ -97,7 +97,7 @@ public class TransactionController {
         transaction.setFinanceMovement("Debito");
 
         // New Transference
-        TransactionModel transactionSend = new TransactionModel();
+        TransactionEntity transactionSend = new TransactionEntity();
 
         transactionSend.setIdPrincipalProduct(transaction.getIdSecondaryProduct());
         transactionSend.setValueOperation(-transaction.getValueOperation());
@@ -114,13 +114,13 @@ public class TransactionController {
         productSend.setBalance(transactionSend.getFinalBalance());
         productInterface.updateBalance(productSend);
 
-      }else {
+      } else {
 
         transaction.setResultOperation("Saldo insuficioente, Saldo disponible: " + 0.996 * product.getBalance());
         transaction.setFinalBalance(product.getBalance());
       }
 
-    }else {
+    } else {
       transaction.setResultOperation("Cuenta inactiva");
     }
     product.setBalance(transaction.getFinalBalance());

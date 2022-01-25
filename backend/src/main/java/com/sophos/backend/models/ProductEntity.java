@@ -4,7 +4,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "products")
-public class ProductModel {
+public class ProductEntity {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -18,11 +18,11 @@ public class ProductModel {
   private String state;
   private double balance;
 
-  public ProductModel() {
+  public ProductEntity() {
 
   }
 
-  public ProductModel(int idProduct, int idClient, String typeAccount, String createDate, String state,
+  public ProductEntity(int idProduct, int idClient, String typeAccount, String createDate, String state,
       double balance, String creationDate, String numberAccount) {
     this.idProduct = idProduct;
     this.idClient = idClient;

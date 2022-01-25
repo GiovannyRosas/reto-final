@@ -2,15 +2,14 @@ package com.sophos.backend.models;
 
 import javax.persistence.*;
 
-
 @Entity
-@Table(name="transactions")
-public class TransactionModel {
+@Table(name = "transactions")
+public class TransactionEntity {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private int idTransaction;
-  @JoinColumn(name="idProduct")
+  @JoinColumn(name = "idProduct")
   private int idPrincipalProduct;
   private int idSecondaryProduct;
   private String typeOperation;
@@ -22,12 +21,13 @@ public class TransactionModel {
   private double GMF;
   private String financeMovement;
 
-  public TransactionModel() {
+  public TransactionEntity() {
 
   }
 
-  public TransactionModel(int idTransaction, int idPrincipalProduct, int idSecondaryProduct, String typeOperation,
-      double valueOperation, String dateOperation,String description, String resultOperation, double finalBalance, double gMF,
+  public TransactionEntity(int idTransaction, int idPrincipalProduct, int idSecondaryProduct, String typeOperation,
+      double valueOperation, String dateOperation, String description, String resultOperation, double finalBalance,
+      double gMF,
       String financeMovement) {
     this.idTransaction = idTransaction;
     this.idPrincipalProduct = idPrincipalProduct;
@@ -129,7 +129,5 @@ public class TransactionModel {
   public void setFinanceMovement(String financeMovement) {
     this.financeMovement = financeMovement;
   }
-
-  
 
 }

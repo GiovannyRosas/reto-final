@@ -4,8 +4,8 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "usuario")
-public class ClientModel {
-	
+public class ClientEntity {
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(unique = true, nullable = false)
@@ -18,12 +18,13 @@ public class ClientModel {
 	private String dateBirth;
 	private String telephone;
 	private String dateCreation;
-	
-	public ClientModel () {
+
+	public ClientEntity() {
 
 	}
 
-	public ClientModel(int id, String typeId, String numberId, String lastname, String name, String email, String dateBirth,
+	public ClientEntity(int id, String typeId, String numberId, String lastname, String name, String email,
+			String dateBirth,
 			String telephone, String dateCreation) {
 		this.id = id;
 		this.typeId = typeId;
@@ -107,7 +108,5 @@ public class ClientModel {
 	public void setDateCreation(String dateCreation) {
 		this.dateCreation = dateCreation;
 	}
-	
 
-	
 }

@@ -4,8 +4,8 @@ import java.util.ArrayList;
 
 import com.sophos.backend.interfaces.ProductInterface;
 import com.sophos.backend.interfaces.TransactionInterface;
-import com.sophos.backend.models.ProductModel;
-import com.sophos.backend.models.TransactionModel;
+import com.sophos.backend.models.ProductEntity;
+import com.sophos.backend.models.TransactionEntity;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -23,13 +23,13 @@ public class ProductController {
 
   // List products owned by the client
   @GetMapping("")
-  public ArrayList<ProductModel> listIdProduct(@PathVariable("idClient") int idClient) {
+  public ArrayList<ProductEntity> listIdProduct(@PathVariable("idClient") int idClient) {
     return productInterface.getIdProduct(idClient);
   }
 
   // List of products different to the selected one
   @GetMapping("/{idProduct}/different")
-  public ArrayList<ProductModel> listIdOtherAvailableProducts(@PathVariable("idClient") int idClient,
+  public ArrayList<ProductEntity> listIdOtherAvailableProducts(@PathVariable("idClient") int idClient,
       @PathVariable("idProduct") int idProduct) {
     return productInterface.listIdOtherAvailableProducts(idClient, idProduct);
   }
@@ -37,8 +37,8 @@ public class ProductController {
   // Create a new product for a cliente
   @PostMapping("")
   @ResponseBody
-  public ProductModel save(@RequestBody ProductModel product, @PathVariable("idClient") int idClient,
-      TransactionModel transaction) {
+  public ProductEntity save(@RequestBody ProductEntity product, @PathVariable("idClient") int idClient,
+      TransactionEntity transaction) {
     product.setIdClient(idClient);
 
     transaction.setIdPrincipalProduct(product.getIdProduct());
@@ -55,13 +55,13 @@ public class ProductController {
 
   // Get one product of a client
   @GetMapping("/{idProduct}")
-  public ProductModel getIdOneProduct(@PathVariable("idProduct") int idProduct) {
+  public ProductEntity getIdOneProduct(@PathVariable("idProduct") int idProduct) {
     return productInterface.getIdOneProduct(idProduct);
   }
 
   // Change status to active or inactive
   @PutMapping("/{idProduct}/changeStatus")
-  public ProductModel changeStatus(ProductModel product, @PathVariable("idProduct") int idProduct) {
+  public ProductEntity changeStatus(ProductEntity product, @PathVariable("idProduct") int idProduct) {
     product = getIdOneProduct(idProduct);
     product.setIdProduct(idProduct);
     product.setIdClient(product.getIdClient());
@@ -81,7 +81,7 @@ public class ProductController {
 
   // Change status to cancell product
   @PutMapping("/{idProduct}/cancel")
-  public ProductModel cancelProduct(ProductModel product, @PathVariable("idProduct") int idProduct) {
+  public ProductEntity cancelProduct(ProductEntity product, @PathVariable("idProduct") int idProduct) {
     product = getIdOneProduct(idProduct);
     product.setIdProduct(idProduct);
     product.setIdClient(product.getIdClient());
@@ -99,7 +99,8 @@ public class ProductController {
 
   // Update product balance
   @PutMapping("/{idProduct}")
-  public ProductModel updateBalance(ProductModel product, @PathVariable("idProduct") int idProduct, int finalBalance) {
+  public ProductEntity updateBalance(ProductEntity product, @PathVariable("idProduct") int idProduct,
+      int finalBalance) {
     product = getIdOneProduct(idProduct);
     product.setBalance(finalBalance);
     return productInterface.updateBalance(product);
@@ -107,7 +108,7 @@ public class ProductController {
 
   // Add money
   @PutMapping("/{idProduct}/{money}")
-  public ProductModel addMovement(ProductModel product, @PathVariable("idProduct") int idProduct,
+  public ProductEntity addMovement(ProductEntity product, @PathVariable("idProduct") int idProduct,
       @PathVariable("money") int money) {
     product = getIdOneProduct(idProduct);
     product.setIdProduct(idProduct);
@@ -124,7 +125,7 @@ public class ProductController {
 
   // Withdraw money
   @PutMapping("/{idProduct}/{money}/withdraw")
-  public ProductModel withdrawMovement(ProductModel product, @PathVariable("idProduct") int idProduct,
+  public ProductEntity withdrawMovement(ProductEntity product, @PathVariable("idProduct") int idProduct,
       @PathVariable("money") int money) {
     product = getIdOneProduct(idProduct);
     product.setIdProduct(idProduct);

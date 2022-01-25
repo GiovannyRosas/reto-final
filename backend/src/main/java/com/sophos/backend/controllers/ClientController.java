@@ -5,8 +5,8 @@ import java.util.ArrayList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import com.sophos.backend.models.ClientModel;
-import com.sophos.backend.models.ProductModel;
+import com.sophos.backend.models.ClientEntity;
+import com.sophos.backend.models.ProductEntity;
 import com.sophos.backend.interfaces.ClientInterface;
 
 @CrossOrigin(origins = "http://localhost:4200")
@@ -19,45 +19,45 @@ public class ClientController {
 
 	// Getting all the clients
 	@GetMapping("")
-	public ArrayList<ClientModel> getUsers(){
+	public ArrayList<ClientEntity> getUsers() {
 		return clientService.getClients();
 	}
-	
-	//Saving client
+
+	// Saving client
 	@PostMapping("")
-	public ClientModel saveUser(@RequestBody ClientModel user) {
+	public ClientEntity saveUser(@RequestBody ClientEntity user) {
 		return this.clientService.saveClient(user);
 	}
-	
-	//Getting only one user by id
+
+	// Getting only one user by id
 	@GetMapping("/{id}")
-	public ClientModel getUserById( @PathVariable("id") int id) {
+	public ClientEntity getUserById(@PathVariable("id") int id) {
 		return clientService.getClientById(id);
 	}
 
-	//Editing client by id
+	// Editing client by id
 	@PutMapping("/{id}")
-	public ClientModel editClient(@RequestBody ClientModel client, @PathVariable("id") int id) {
+	public ClientEntity editClient(@RequestBody ClientEntity client, @PathVariable("id") int id) {
 		client.setId(id);
 		return clientService.editClient(client);
 	}
 
-	//Deleting a Client
+	// Deleting a Client
 	@DeleteMapping("/{id}")
 	public void deleteClient(@PathVariable("id") int id) {
-		ArrayList<ProductModel> product = new ArrayList<ProductModel>(id);
+		ArrayList<ProductEntity> product = new ArrayList<ProductEntity>(id);
 		int count = 0;
-		for(ProductModel productModel: product) {
-			if(productModel.getState().equals("activa") || productModel.getState().equals("inactiva")) {
+		for (ProductEntity productModel : product) {
+			if (productModel.getState().equals("activa") || productModel.getState().equals("inactiva")) {
 				count++;
 			}
 		}
-		if(count > 0) {
+		if (count > 0) {
 			System.out.println("Productos activos o inactivos");
-		}else {
+		} else {
 			System.out.println("Todos productos cancelados");
 			clientService.deleteClient(id);
 		}
 	}
-	
+
 }

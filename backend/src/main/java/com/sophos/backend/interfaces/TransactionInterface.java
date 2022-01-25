@@ -2,13 +2,12 @@ package com.sophos.backend.interfaces;
 
 import java.util.ArrayList;
 
-import com.sophos.backend.models.TransactionModel;
-
+import com.sophos.backend.models.TransactionEntity;
 
 public interface TransactionInterface {
-  
-  public TransactionModel createTransaction(TransactionModel transactionModel, int idPrincipalProduct);
 
-  public ArrayList<TransactionModel> getIdTransaction(int idPrincipalProduct);
+  public TransactionEntity createTransaction(TransactionEntity transactionModel, int idPrincipalProduct);
+
+  public ArrayList<TransactionEntity> getIdTransaction(int idPrincipalProduct);
 
 }
