@@ -2,66 +2,24 @@ package com.sophos.backend.services;
 
 import java.util.ArrayList;
 
-import com.sophos.backend.interfaces.ProductInterface;
-import com.sophos.backend.interfaces.TransactionInterface;
 import com.sophos.backend.models.ProductEntity;
-import com.sophos.backend.repositories.ProductRepository;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+public interface ProductService {
+  public ArrayList<ProductEntity> getIdProduct(int idClient);
 
-@Service
-public class ProductService implements ProductInterface {
+  public ProductEntity getIdOneProduct(int idProduct);
 
-  @Autowired
-  private ProductRepository productRepository;
+  public ProductEntity addProduct(ProductEntity product, int idClient);
 
-  @Autowired
-  TransactionInterface transactionInterface;
+  public ProductEntity changeStatus(ProductEntity product);
 
-  @Override
-  public ArrayList<ProductEntity> getIdProduct(int idClient) {
-    return productRepository.findByIdClient(idClient);
-  }
+  public ProductEntity updateBalance(ProductEntity product);
 
-  @Override
-  public ProductEntity getIdOneProduct(int idProduct) {
-    return productRepository.findByIdProduct(idProduct);
-  }
+  public ArrayList<ProductEntity> listIdOtherAvailableProducts(int idClient, int idProduct);
 
-  @Override
-  public ProductEntity addProduct(ProductEntity product, int idClient) {
-    return productRepository.save(product);
-  }
+  public ProductEntity cancelProduct(ProductEntity product);
 
-  @Override
-  public ProductEntity changeStatus(ProductEntity product) {
-    return productRepository.save(product);
-  }
+  public ProductEntity addToBalance(ProductEntity product, int movement);
 
-  @Override
-  public ProductEntity updateBalance(ProductEntity product) {
-    return productRepository.save(product);
-  }
-
-  @Override
-  public ArrayList<ProductEntity> listIdOtherAvailableProducts(int idClient, int idProduct) {
-    return productRepository.findByStateNotAndIdClientNotAndIdProductNot("Cancelado", idClient, idProduct);
-  }
-
-  @Override
-  public ProductEntity cancelProduct(ProductEntity product) {
-    return productRepository.save(product);
-  }
-
-  @Override
-  public ProductEntity addToBalance(ProductEntity product, int movement) {
-    return productRepository.save(product);
-  }
-
-  @Override
-  public ProductEntity withdrawToBalance(ProductEntity product, int movement) {
-    return productRepository.save(product);
-  }
-
+  public ProductEntity withdrawToBalance(ProductEntity product, int movement);
 }

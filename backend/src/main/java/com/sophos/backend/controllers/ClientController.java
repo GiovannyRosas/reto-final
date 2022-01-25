@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*;
 
 import com.sophos.backend.models.ClientEntity;
 import com.sophos.backend.models.ProductEntity;
-import com.sophos.backend.interfaces.ClientInterface;
+import com.sophos.backend.services.ClientService;
 
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
@@ -15,7 +15,7 @@ import com.sophos.backend.interfaces.ClientInterface;
 public class ClientController {
 
 	@Autowired
-	ClientInterface clientService;
+	ClientService clientService;
 
 	// Getting all the clients
 	@GetMapping("")

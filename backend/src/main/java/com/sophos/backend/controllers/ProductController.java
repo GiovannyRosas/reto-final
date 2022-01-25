@@ -2,10 +2,10 @@ package com.sophos.backend.controllers;
 
 import java.util.ArrayList;
 
-import com.sophos.backend.interfaces.ProductInterface;
-import com.sophos.backend.interfaces.TransactionInterface;
 import com.sophos.backend.models.ProductEntity;
 import com.sophos.backend.models.TransactionEntity;
+import com.sophos.backend.services.ProductService;
+import com.sophos.backend.services.TransactionService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -16,10 +16,10 @@ import org.springframework.web.bind.annotation.*;
 public class ProductController {
 
   @Autowired
-  ProductInterface productInterface;
+  ProductService productInterface;
 
   @Autowired
-  TransactionInterface transactionInterface;
+  TransactionService transactionInterface;
 
   // List products owned by the client
   @GetMapping("")
