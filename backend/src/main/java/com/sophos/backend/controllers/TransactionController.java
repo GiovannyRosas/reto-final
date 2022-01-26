@@ -2,8 +2,8 @@ package com.sophos.backend.controllers;
 
 import java.util.ArrayList;
 
-import com.sophos.backend.models.ProductEntity;
-import com.sophos.backend.models.TransactionEntity;
+import com.sophos.backend.entity.ProductEntity;
+import com.sophos.backend.entity.TransactionEntity;
 import com.sophos.backend.services.ProductService;
 import com.sophos.backend.services.TransactionService;
 

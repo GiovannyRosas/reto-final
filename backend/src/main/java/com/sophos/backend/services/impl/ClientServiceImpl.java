@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.sophos.backend.models.ClientEntity;
+import com.sophos.backend.entity.ClientEntity;
 import com.sophos.backend.repositories.ClientRepository;
 import com.sophos.backend.services.ClientService;
 

@@ -5,8 +5,8 @@ import java.util.ArrayList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import com.sophos.backend.models.ClientEntity;
-import com.sophos.backend.models.ProductEntity;
+import com.sophos.backend.entity.ClientEntity;
+import com.sophos.backend.entity.ProductEntity;
 import com.sophos.backend.services.ClientService;
 
 @CrossOrigin(origins = "http://localhost:4200")

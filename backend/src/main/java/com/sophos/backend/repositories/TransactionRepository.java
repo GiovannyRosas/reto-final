@@ -2,7 +2,7 @@ package com.sophos.backend.repositories;
 
 import java.util.ArrayList;
 
-import com.sophos.backend.models.TransactionEntity;
+import com.sophos.backend.entity.TransactionEntity;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

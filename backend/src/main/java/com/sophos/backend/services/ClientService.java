@@ -2,7 +2,7 @@ package com.sophos.backend.services;
 
 import java.util.ArrayList;
 
-import com.sophos.backend.models.ClientEntity;
+import com.sophos.backend.entity.ClientEntity;
 
 public interface ClientService {
 

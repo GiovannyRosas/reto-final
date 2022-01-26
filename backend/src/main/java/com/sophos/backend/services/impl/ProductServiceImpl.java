@@ -2,7 +2,7 @@ package com.sophos.backend.services.impl;
 
 import java.util.ArrayList;
 
-import com.sophos.backend.models.ProductEntity;
+import com.sophos.backend.entity.ProductEntity;
 import com.sophos.backend.repositories.ProductRepository;
 import com.sophos.backend.services.ProductService;
 import com.sophos.backend.services.TransactionService;

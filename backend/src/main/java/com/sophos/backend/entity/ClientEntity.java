@@ -1,4 +1,4 @@
-package com.sophos.backend.models;
+package com.sophos.backend.entity;
 
 import javax.persistence.*;
 

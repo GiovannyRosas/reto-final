@@ -1,9 +1,9 @@
 package com.sophos.backend.repositories;
 
+import com.sophos.backend.entity.ClientEntity;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-
-import com.sophos.backend.models.ClientEntity;
 
 @Repository
 public interface ClientRepository extends JpaRepository<ClientEntity, Integer> {

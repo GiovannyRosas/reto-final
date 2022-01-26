@@ -2,7 +2,7 @@ package com.sophos.backend.repositories;
 
 import java.util.ArrayList;
 
-import com.sophos.backend.models.ProductEntity;
+import com.sophos.backend.entity.ProductEntity;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;

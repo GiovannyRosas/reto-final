@@ -2,7 +2,7 @@ package com.sophos.backend.services;
 
 import java.util.ArrayList;
 
-import com.sophos.backend.models.ProductEntity;
+import com.sophos.backend.entity.ProductEntity;
 
 public interface ProductService {
   public ArrayList<ProductEntity> getIdProduct(int idClient);

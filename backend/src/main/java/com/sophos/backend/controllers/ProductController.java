@@ -2,18 +2,27 @@ package com.sophos.backend.controllers;
 
 import java.util.ArrayList;
 
-import com.sophos.backend.models.ProductEntity;
-import com.sophos.backend.models.TransactionEntity;
+import com.sophos.backend.entity.ProductEntity;
+import com.sophos.backend.entity.TransactionEntity;
+import com.sophos.backend.model.GeneralResponse;
 import com.sophos.backend.services.ProductService;
 import com.sophos.backend.services.TransactionService;
 
+import org.slf4j.LoggerFactory;
+import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import io.swagger.annotations.ApiOperation;
 
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping("/clients/{idClient}/products")
 public class ProductController {
+
+  public static final Logger logger = LoggerFactory.getLogger(ProductController.class);
 
   @Autowired
   ProductService productInterface;
@@ -22,9 +31,34 @@ public class ProductController {
   TransactionService transactionInterface;
 
   // List products owned by the client
+  @ApiOperation(value = "List products", response = ResponseEntity.class)
   @GetMapping("")
-  public ArrayList<ProductEntity> listIdProduct(@PathVariable("idClient") int idClient) {
-    return productInterface.getIdProduct(idClient);
+  public ResponseEntity<GeneralResponse<ArrayList<ProductEntity>>> listIdProduct(
+      @PathVariable("idClient") int idClient) {
+
+    GeneralResponse<ArrayList<ProductEntity>> response = new GeneralResponse<>();
+    HttpStatus status = null;
+    ArrayList<ProductEntity> data = null;
+
+    try {
+      data = productInterface.getIdProduct(idClient);
+      String msg = "It found " + data.size() + " credit cards.";
+
+      response.setSuccess(true);
+      response.setMessage(msg);
+      response.setData(data);
+      status = HttpStatus.OK;
+    } catch (Exception e) {
+      String msg = "Something has failed. Please contact suuport.";
+      status = HttpStatus.INTERNAL_SERVER_ERROR;
+      response.setMessage(msg);
+      response.setSuccess(false);
+
+      String log = "End point GET/credit-cards/customer has failed. " + e.getLocalizedMessage();
+      logger.error(log);
+    }
+
+    return new ResponseEntity<>(response, status);
   }
 
   // List of products different to the selected one
