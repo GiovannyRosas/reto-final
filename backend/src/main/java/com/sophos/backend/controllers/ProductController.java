@@ -42,19 +42,19 @@ public class ProductController {
 
     try {
       data = productInterface.getIdProduct(idClient);
-      String msg = "It found " + data.size() + " credit cards.";
+      String msg = "It found " + data.size() + " Products.";
 
       response.setSuccess(true);
       response.setMessage(msg);
       response.setData(data);
       status = HttpStatus.OK;
     } catch (Exception e) {
-      String msg = "Something has failed. Please contact suuport.";
+      String msg = "Something has failed. Please contact support.";
       status = HttpStatus.INTERNAL_SERVER_ERROR;
       response.setMessage(msg);
       response.setSuccess(false);
 
-      String log = "End point GET/credit-cards/customer has failed. " + e.getLocalizedMessage();
+      String log = "End point GET/products has failed. " + e.getLocalizedMessage();
       logger.error(log);
     }
 
@@ -71,19 +71,46 @@ public class ProductController {
   // Create a new product for a cliente
   @PostMapping("")
   @ResponseBody
-  public ProductEntity save(@RequestBody ProductEntity product, @PathVariable("idClient") int idClient,
+  public ResponseEntity<GeneralResponse<ProductEntity>> save(@RequestBody ProductEntity product,
+      @PathVariable("idClient") int idClient,
       TransactionEntity transaction) {
-    product.setIdClient(idClient);
+    GeneralResponse<ProductEntity> response = new GeneralResponse<>();
+    HttpStatus status = null;
+    ProductEntity data = null;
 
-    transaction.setIdPrincipalProduct(product.getIdProduct());
-    transaction.setDescription("Creación producto");
-    transaction.setResultOperation("Efectiva");
-    transaction.setFinalBalance(0);
-    transaction.setValueOperation(0);
-    transaction.setTypeOperation("Creación cuenta");
-    transaction.setDateOperation(transaction.getDateOperation());
-    transactionInterface.createTransaction(transaction, product.getIdProduct());
-    return productInterface.addProduct(product, idClient);
+    try {
+
+      product.setIdClient(idClient);
+
+      transaction.setIdPrincipalProduct(product.getIdProduct());
+      transaction.setDescription("Creación producto");
+      transaction.setResultOperation("Efectiva");
+      transaction.setFinalBalance(0);
+      transaction.setValueOperation(0);
+      transaction.setTypeOperation("Creación cuenta");
+      transaction.setDateOperation(transaction.getDateOperation());
+      transactionInterface.createTransaction(transaction, product.getIdProduct());
+
+      data = productInterface.addProduct(product, idClient);
+
+      String msg = "It create Products.";
+
+      response.setSuccess(true);
+      response.setMessage(msg);
+      response.setData(data);
+      status = HttpStatus.OK;
+
+    } catch (Exception e) {
+      String msg = "Something has failed. Please contact support.";
+      status = HttpStatus.INTERNAL_SERVER_ERROR;
+      response.setMessage(msg);
+      response.setSuccess(false);
+
+      String log = "End point GET/products has failed. " + e.getLocalizedMessage();
+      logger.error(log);
+    }
+
+    return new ResponseEntity<>(response, status);
 
   }
 
@@ -141,9 +168,9 @@ public class ProductController {
   }
 
   // Add money
-  @PutMapping("/{idProduct}/{money}")
+  @PutMapping("/{idProduct}/{balance}")
   public ProductEntity addMovement(ProductEntity product, @PathVariable("idProduct") int idProduct,
-      @PathVariable("money") int money) {
+      @PathVariable("balance") int money) {
     product = getIdOneProduct(idProduct);
     product.setIdProduct(idProduct);
     product.setIdClient(product.getIdClient());
@@ -158,9 +185,9 @@ public class ProductController {
   }
 
   // Withdraw money
-  @PutMapping("/{idProduct}/{money}/withdraw")
+  @PutMapping("/{idProduct}/{balance}/withdraw")
   public ProductEntity withdrawMovement(ProductEntity product, @PathVariable("idProduct") int idProduct,
-      @PathVariable("money") int money) {
+      @PathVariable("balance") int money) {
     product = getIdOneProduct(idProduct);
     product.setIdProduct(idProduct);
     product.setIdClient(product.getIdClient());
