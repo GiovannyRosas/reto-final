@@ -63,15 +63,41 @@ public class ProductController {
 
   // List of products different to the selected one
   @GetMapping("/{idProduct}/different")
-  public ArrayList<ProductEntity> listIdOtherAvailableProducts(@PathVariable("idClient") int idClient,
+  public ResponseEntity<GeneralResponse<ArrayList<ProductEntity>>> listIdOtherAvailableProducts(
+      @PathVariable("idClient") int idClient,
       @PathVariable("idProduct") int idProduct) {
-    return productInterface.listIdOtherAvailableProducts(idClient, idProduct);
+    GeneralResponse<ArrayList<ProductEntity>> response = new GeneralResponse();
+    HttpStatus status = null;
+    ArrayList<ProductEntity> data = null;
+
+    try {
+      data = productInterface.listIdOtherAvailableProducts(idClient, idProduct);
+
+      String msg = "It Products.";
+
+      response.setSuccess(true);
+      response.setMessage(msg);
+      response.setData(data);
+      status = HttpStatus.OK;
+
+    } catch (Exception e) {
+      String msg = "Something has failed. Please contact support.";
+      status = HttpStatus.INTERNAL_SERVER_ERROR;
+      response.setMessage(msg);
+      response.setSuccess(false);
+
+      String log = "End point GET/products/" + idProduct + "/different has failed. " + e.getLocalizedMessage();
+      logger.error(log);
+    }
+
+    return new ResponseEntity<>(response, status);
+
   }
 
   // Create a new product for a cliente
   @PostMapping("")
   @ResponseBody
-  public ResponseEntity<GeneralResponse<ProductEntity>> save(@RequestBody ProductEntity product,
+  public ResponseEntity<GeneralResponse<ProductEntity>> saveProduct(@RequestBody ProductEntity product,
       @PathVariable("idClient") int idClient,
       TransactionEntity transaction) {
     GeneralResponse<ProductEntity> response = new GeneralResponse<>();
