@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { GeneralResponseModel } from '../models/GeneralResponseModel';
 import { ProductModel } from '../models/ProductModel';
 
 @Injectable({
@@ -12,9 +13,9 @@ export class ProductsService {
   constructor(private http: HttpClient) {}
 
   //List all the products of the client
-  getProduct(id: any): Observable<ProductModel[]> {
+  getProduct(id: any): Observable<GeneralResponseModel<ProductModel[]>> {
     const url = `${this.UrlProduct}${id}/products`;
-    return this.http.get<ProductModel[]>(url);
+    return this.http.get<GeneralResponseModel<ProductModel[]>>(url);
   }
 
   //List one product

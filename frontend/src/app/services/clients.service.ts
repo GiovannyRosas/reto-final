@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { ClientModel } from '../models/ClientModel';
+import { GeneralResponseModel } from '../models/GeneralResponseModel';
 
 @Injectable({
   providedIn: 'root',
@@ -11,8 +12,8 @@ export class ClientsService {
 
   constructor(private http: HttpClient) {}
 
-  getClients(): Observable<ClientModel[]> {
-    return this.http.get<ClientModel[]>(this.URIClient);
+  getClients(): Observable<GeneralResponseModel<ClientModel[]>> {
+    return this.http.get<GeneralResponseModel<ClientModel[]>>(this.URIClient);
   }
 
   getClientId(id: any): Observable<any> {
