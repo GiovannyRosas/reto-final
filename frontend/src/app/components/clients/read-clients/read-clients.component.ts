@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ClientModel } from 'src/app/models/ClientModel';
+import { GeneralResponseModel } from 'src/app/models/GeneralResponseModel';
 import { ClientsService } from 'src/app/services/clients.service';
 
 @Component({
@@ -16,8 +17,13 @@ export class ReadClientsComponent implements OnInit {
   constructor(private serviceClient: ClientsService, private router: Router) {}
 
   ngOnInit(): void {
-    this.serviceClient.getClients().subscribe((data) => {
-      this.clients = data;
+    this.serviceClient.getClients().subscribe({
+      next: (res) => {
+        if (res.success) {
+          this.clients = res.data;
+        }
+      },
+      error: (error) => console.error(error),
     });
   }
 

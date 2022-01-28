@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ɵɵsetComponentScope } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ProductModel } from 'src/app/models/ProductModel';
 import { ClientsService } from 'src/app/services/clients.service';
@@ -22,20 +22,33 @@ export class ReadProductComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.route.paramMap.subscribe((params) => {
-      if (params.has('id')) {
-        this.productService
-          .getProduct(params.get('id'))
-          .subscribe((data) => (this.products = data));
-      }
+    this.route.paramMap.subscribe({
+      next: (params) => {
+        if (params.has('id')) {
+          this.productService
+            .getProduct(params.get('id'))
+            .subscribe((res) => (this.products = res.data));
+        }
+      },
+      error: (error) => {
+        console.error(error);
+      },
     });
   }
 
   addProduct(): void {
-    this.route.paramMap.subscribe((params) => {
-      if (params.has('id')) {
-        this.router.navigate(['clients/', params.get('id'), 'products', 'add']);
-      }
+    this.route.paramMap.subscribe({
+      next: (params) => {
+        if (params.has('id')) {
+          this.router.navigate([
+            'clients/',
+            params.get('id'),
+            'products',
+            'add',
+          ]);
+        }
+      },
+      error: (error) => console.log(error),
     });
   }
 
@@ -48,7 +61,7 @@ export class ReadProductComponent implements OnInit {
           this.route.paramMap.subscribe((params) => {
             this.productService
               .getProduct(params.get('id'))
-              .subscribe((data) => (this.products = data));
+              .subscribe((res) => (this.products = res.data));
           });
           this.route.paramMap.subscribe((params) => {
             this.router.navigate(['clients/', params.get('id'), 'products']);
@@ -56,11 +69,14 @@ export class ReadProductComponent implements OnInit {
         },
         error: (e) => console.error(e),
       });
-    this.route.paramMap.subscribe((params) => {
-      this.router.navigate(['clients/']);
-      if (params.has('id')) {
-        this.router.navigate(['clients/', params.get('id'), 'products']);
-      }
+    this.route.paramMap.subscribe({
+      next: (params) => {
+        this.router.navigate(['clients/']);
+        if (params.has('id')) {
+          this.router.navigate(['clients/', params.get('id'), 'products']);
+        }
+      },
+      error: (error) => console.log(error),
     });
   }
 
@@ -75,7 +91,7 @@ export class ReadProductComponent implements OnInit {
           this.route.paramMap.subscribe((params) => {
             this.productService
               .getProduct(params.get('id'))
-              .subscribe((data) => (this.products = data));
+              .subscribe((resp) => (this.products = resp.data));
           });
           this.route.paramMap.subscribe((params) => {
             this.router.navigate(['clients/', params.get('id'), 'products']);

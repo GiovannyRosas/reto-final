@@ -46,7 +46,7 @@ export class CreateProductComponent implements OnInit {
       if (params.has('id')) {
         this.productService
           .getProduct(params.get('id'))
-          .subscribe((res) => (this.products = res));
+          .subscribe((res) => (this.products = res.data));
         this.productService.createProduct(data, params.get('id')).subscribe({
           next: () => {
             this.router.navigate(['clients', params.get('id'), 'products']);
