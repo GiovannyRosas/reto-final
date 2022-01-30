@@ -12,6 +12,7 @@ import { FormsModule } from '@angular/forms';
 import { ReadClientsComponent } from './components/clients/read-clients/read-clients.component';
 import { EditClientComponent } from './components/clients/edit-client/edit-client.component';
 import { ReadProductComponent } from './components/products/read-product/read-product.component';
+import { TransaccionesComponent } from './components/transacciones/transacciones.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { ReadProductComponent } from './components/products/read-product/read-pr
     ReadClientsComponent,
     EditClientComponent,
     ReadProductComponent,
+    TransaccionesComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, HttpClientModule, FormsModule],
   providers: [ClientsService],
