@@ -8,13 +8,13 @@ import { ProductModel } from '../models/ProductModel';
   providedIn: 'root',
 })
 export class ProductsService {
-  UrlProduct = 'http://localhost:8080/clients/';
+  UrlProduct = 'http://localhost:8080/products/';
 
   constructor(private http: HttpClient) {}
 
   //List all the products of the client
   getProduct(id: any): Observable<GeneralResponseModel<ProductModel[]>> {
-    const url = `${this.UrlProduct}${id}/products`;
+    const url = `${this.UrlProduct}client/${id}`;
     return this.http.get<GeneralResponseModel<ProductModel[]>>(url);
   }
 
@@ -26,19 +26,19 @@ export class ProductsService {
 
   //Create a product for a client
   createProduct(data: any, id: any): Observable<any> {
-    const url = `${this.UrlProduct}${id}/products`;
+    const url = `${this.UrlProduct}client/${id}`;
     return this.http.post(url, data);
   }
 
   //Change status to active or inactive
-  updateStatusProduct(id: any, idProduct: any, data: any): Observable<any> {
-    const url = `${this.UrlProduct}${id}/products/${idProduct}/changeStatus`;
+  updateStatusProduct(idProduct: any, data: any): Observable<any> {
+    const url = `${this.UrlProduct}${idProduct}/changeStatus`;
     return this.http.put(url, data);
   }
 
   //Change status to Cancell
-  cancelStatusProduct(id: any, idProduct: any, data: any): Observable<any> {
-    const url = `${this.UrlProduct}${id}/products/${idProduct}/cancel`;
+  cancelStatusProduct(idProduct: any, data: any): Observable<any> {
+    const url = `${this.UrlProduct}${idProduct}/cancel`;
     return this.http.put(url, data);
   }
 
