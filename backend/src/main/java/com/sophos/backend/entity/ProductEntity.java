@@ -22,6 +22,10 @@ public class ProductEntity {
 
   }
 
+  public ProductEntity(int idProduct) {
+    this.idProduct = idProduct;
+  }
+
   public ProductEntity(int idProduct, int idClient, String typeAccount, String createDate, String state,
       double balance, String creationDate, String numberAccount) {
     this.idProduct = idProduct;

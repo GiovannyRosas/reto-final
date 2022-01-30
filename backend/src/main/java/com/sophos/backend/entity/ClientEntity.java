@@ -3,7 +3,7 @@ package com.sophos.backend.entity;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "usuario")
+@Table(name = "clients")
 public class ClientEntity {
 
 	@Id

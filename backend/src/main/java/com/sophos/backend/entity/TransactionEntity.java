@@ -12,13 +12,13 @@ public class TransactionEntity {
   @JoinColumn(name = "idProduct")
   private int idPrincipalProduct;
   private int idSecondaryProduct;
+  private int numberAccount;
   private String typeOperation;
   private double valueOperation;
   private String dateOperation;
   private String description;
   private String resultOperation;
   private double finalBalance;
-  private double GMF;
   private String financeMovement;
 
   public TransactionEntity() {
@@ -27,23 +27,30 @@ public class TransactionEntity {
 
   public TransactionEntity(int idTransaction, int idPrincipalProduct, int idSecondaryProduct, String typeOperation,
       double valueOperation, String dateOperation, String description, String resultOperation, double finalBalance,
-      double gMF,
-      String financeMovement) {
+      String financeMovement, int numberAccount) {
     this.idTransaction = idTransaction;
     this.idPrincipalProduct = idPrincipalProduct;
     this.idSecondaryProduct = idSecondaryProduct;
+    this.numberAccount = numberAccount;
     this.typeOperation = typeOperation;
     this.valueOperation = valueOperation;
     this.dateOperation = dateOperation;
     this.description = description;
     this.resultOperation = resultOperation;
     this.finalBalance = finalBalance;
-    GMF = gMF;
     this.financeMovement = financeMovement;
   }
 
   public String getDescription() {
     return description;
+  }
+
+  public int getNumberAccount() {
+    return numberAccount;
+  }
+
+  public void setNumberAccount(int numberAccount) {
+    this.numberAccount = numberAccount;
   }
 
   public void setDescription(String description) {
@@ -112,14 +119,6 @@ public class TransactionEntity {
 
   public void setFinalBalance(double finalBalance) {
     this.finalBalance = finalBalance;
-  }
-
-  public double getGMF() {
-    return GMF;
-  }
-
-  public void setGMF(double gMF) {
-    GMF = gMF;
   }
 
   public String getFinanceMovement() {

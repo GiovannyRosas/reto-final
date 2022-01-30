@@ -8,6 +8,4 @@ public interface TransactionService {
 
   public TransactionEntity createTransaction(TransactionEntity transactionModel, int idPrincipalProduct);
 
-  public ArrayList<TransactionEntity> getIdTransaction(int idPrincipalProduct);
-
 }

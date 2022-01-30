@@ -20,9 +20,4 @@ public class TransactionServiceImpl implements TransactionService {
     return transactionRepository.save(transaction);
   }
 
-  @Override
-  public ArrayList<TransactionEntity> getIdTransaction(int idPrincipalProduct) {
-    return transactionRepository.findByIdPrincipalProductAndResultOperation(idPrincipalProduct, "Concluido");
-  }
-
 }

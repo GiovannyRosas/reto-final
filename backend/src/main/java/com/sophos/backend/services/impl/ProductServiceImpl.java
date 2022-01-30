@@ -14,23 +14,23 @@ import org.springframework.stereotype.Service;
 public class ProductServiceImpl implements ProductService {
 
   @Autowired
-  private ProductRepository productRepository;
+  ProductRepository productRepository;
 
   @Autowired
   TransactionService transactionInterface;
 
   @Override
-  public ArrayList<ProductEntity> getIdProduct(int idClient) {
+  public ArrayList<ProductEntity> getIdProduct(int idClient) throws Exception {
     return productRepository.findByIdClient(idClient);
   }
 
   @Override
-  public ProductEntity getIdOneProduct(int idProduct) {
-    return productRepository.findByIdProduct(idProduct);
+  public ProductEntity findById(int id) {
+    return productRepository.findById(id).orElse(null);
   }
 
   @Override
-  public ProductEntity addProduct(ProductEntity product, int idClient) {
+  public ProductEntity addProduct(ProductEntity product, int idClient) throws Exception {
     return productRepository.save(product);
   }
 
@@ -45,23 +45,38 @@ public class ProductServiceImpl implements ProductService {
   }
 
   @Override
-  public ArrayList<ProductEntity> listIdOtherAvailableProducts(int idClient, int idProduct) {
-    return productRepository.findByStateNotAndIdClientNotAndIdProductNot("Cancelado", idClient, idProduct);
+  public String findProductType(Integer id) throws Exception {
+    return productRepository.findProductType(id);
   }
 
   @Override
-  public ProductEntity cancelProduct(ProductEntity product) {
+  public String findProductState(Integer id) throws Exception {
+    return productRepository.findProductState(id);
+  }
+
+  @Override
+  public int findIdByNumberAccount(int id) throws Exception {
+    return productRepository.findIdByAccountNumber(id);
+  }
+
+  @Override
+  public Double findBalance(int id) throws Exception {
+    return productRepository.findBalance(id);
+  }
+
+  @Override
+  public ProductEntity cancelProduct(ProductEntity product) throws Exception {
     return productRepository.save(product);
   }
 
   @Override
-  public ProductEntity addToBalance(ProductEntity product, int movement) {
-    return productRepository.save(product);
+  public void addAmount(int id, Double value) throws Exception {
+    productRepository.addAmmount(id, value);
   }
 
   @Override
-  public ProductEntity withdrawToBalance(ProductEntity product, int movement) {
-    return productRepository.save(product);
+  public void substractAmmount(int id, Double value) throws Exception {
+    productRepository.substractAmmount(id, value);
   }
 
 }

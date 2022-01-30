@@ -5,21 +5,28 @@ import java.util.ArrayList;
 import com.sophos.backend.entity.ProductEntity;
 
 public interface ProductService {
-  public ArrayList<ProductEntity> getIdProduct(int idClient);
+  public ArrayList<ProductEntity> getIdProduct(int idClient) throws Exception;
 
-  public ProductEntity getIdOneProduct(int idProduct);
+  public ProductEntity findById(int idProduct);
 
-  public ProductEntity addProduct(ProductEntity product, int idClient);
+  public String findProductType(Integer id) throws Exception;
+
+  public String findProductState(Integer id) throws Exception;
+
+  public int findIdByNumberAccount(int id) throws Exception;
+
+  public Double findBalance(int id) throws Exception;
+
+  public ProductEntity addProduct(ProductEntity product, int idClient) throws Exception;
 
   public ProductEntity changeStatus(ProductEntity product);
 
   public ProductEntity updateBalance(ProductEntity product);
 
-  public ArrayList<ProductEntity> listIdOtherAvailableProducts(int idClient, int idProduct);
+  public ProductEntity cancelProduct(ProductEntity product) throws Exception;
 
-  public ProductEntity cancelProduct(ProductEntity product);
+  public void addAmount(int id, Double value) throws Exception;
 
-  public ProductEntity addToBalance(ProductEntity product, int movement);
+  public void substractAmmount(int id, Double value) throws Exception;
 
-  public ProductEntity withdrawToBalance(ProductEntity product, int movement);
 }
