@@ -54,7 +54,7 @@ export class ReadProductComponent implements OnInit {
 
   updateProduct(idClient: any, idProduct: any): void {
     this.productService
-      .updateStatusProduct(idClient, idProduct, this.currentProduct)
+      .updateStatusProduct(idProduct, this.currentProduct)
       .subscribe({
         next: (res) => {
           alert('El estado del producto fue actualizado con éxito');
@@ -80,9 +80,9 @@ export class ReadProductComponent implements OnInit {
     });
   }
 
-  cancelProduct(idClient: any, idProduct: any): void {
+  cancelProduct(idProduct: any): void {
     this.productService
-      .cancelStatusProduct(idClient, idProduct, this.currentProduct)
+      .cancelStatusProduct(idProduct, this.currentProduct)
       .subscribe({
         next: (res) => {
           alert(
@@ -91,7 +91,7 @@ export class ReadProductComponent implements OnInit {
           this.route.paramMap.subscribe((params) => {
             this.productService
               .getProduct(params.get('id'))
-              .subscribe((resp) => (this.products = resp.data));
+              .subscribe((res) => (this.products = res.data));
           });
           this.route.paramMap.subscribe((params) => {
             this.router.navigate(['clients/', params.get('id'), 'products']);
